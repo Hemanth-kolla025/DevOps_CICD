@@ -11,11 +11,17 @@
 
     <title>3D Solar System Explorer</title>
 
+
     <style>
+
+        /* =====================================================
+           BASIC PAGE
+           ===================================================== */
 
         * {
             box-sizing: border-box;
         }
+
 
         html,
         body {
@@ -27,33 +33,35 @@
 
             overflow: hidden;
 
-            background:
-                radial-gradient(
-                    circle at center,
-                    #07152c,
-                    #010207 65%
-                );
-
-            color: white;
+            background: #000008;
 
             font-family:
                 Arial,
                 Helvetica,
                 sans-serif;
+
+            color: white;
         }
 
 
         canvas {
 
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
             display: block;
 
+            width: 100%;
+            height: 100%;
         }
 
 
 
-        /* ===============================
+        /* =====================================================
            LEFT CONTROL PANEL
-           =============================== */
+           ===================================================== */
 
         #panel {
 
@@ -62,101 +70,122 @@
             top: 20px;
             left: 20px;
 
-            width: 340px;
+            width: 330px;
 
-            padding: 18px;
+            padding: 20px;
 
-            z-index: 10;
+            z-index: 100;
 
             background:
                 rgba(
-                    5,
-                    15,
-                    35,
-                    0.72
+                    2,
+                    13,
+                    32,
+                    0.82
                 );
 
-            border:
-                1px solid #31527a;
-
-            border-radius: 16px;
-
             backdrop-filter:
-                blur(12px);
+                blur(14px);
+
+            border:
+                1px solid
+                rgba(
+                    80,
+                    160,
+                    255,
+                    0.40
+                );
+
+            border-radius: 18px;
 
             box-shadow:
-                0 0 30px
+                0 10px 40px
                 rgba(
                     0,
-                    120,
-                    255,
-                    0.15
+                    0,
+                    0,
+                    0.6
                 );
         }
 
 
         #panel h1 {
 
-            margin: 0 0 10px;
+            margin:
+                0 0 12px 0;
 
-            font-size: 21px;
+            color: #78c7ff;
 
-            color: #84ccff;
+            font-size: 22px;
         }
 
 
-        #panel p {
+        .instruction {
 
-            margin: 5px 0;
+            margin: 6px 0;
 
-            color: #c7d6eb;
+            color: #c8d7ea;
 
             font-size: 13px;
         }
 
 
 
-        /* ===============================
+        /* =====================================================
            PLANET BUTTONS
-           =============================== */
+           ===================================================== */
 
-        #planet-buttons {
+        #planetButtons {
 
             display: flex;
 
             flex-wrap: wrap;
 
-            gap: 7px;
+            gap: 6px;
 
-            margin-top: 14px;
+            margin-top: 15px;
         }
 
 
         button {
 
-            padding: 7px 11px;
+            padding:
+                7px 11px;
 
             border:
-                1px solid #4e78a7;
 
-            border-radius: 20px;
+                1px solid
+                rgba(
+                    100,
+                    180,
+                    255,
+                    0.55
+                );
+
+            border-radius:
+                20px;
 
             background:
-                #102541;
+                rgba(
+                    15,
+                    45,
+                    80,
+                    0.85
+                );
 
             color: white;
 
             cursor: pointer;
 
             transition:
-                0.2s;
+                all 0.20s;
         }
 
 
         button:hover {
 
             background:
-                #1d568e;
+                #1673bb;
 
             transform:
                 translateY(-2px);
@@ -164,118 +193,172 @@
             box-shadow:
                 0 0 12px
                 rgba(
-                    75,
+                    0,
                     170,
                     255,
-                    0.5
+                    0.6
                 );
         }
 
 
 
-        /* ===============================
+        /* =====================================================
            SPEED CONTROLS
-           =============================== */
+           ===================================================== */
 
-        #controls {
-
-            margin-top: 15px;
-
-            padding-top: 12px;
+        #simulationControls {
 
             border-top:
-                1px solid #31527a;
+                1px solid
+                rgba(
+                    100,
+                    180,
+                    255,
+                    0.30
+                );
+
+            margin-top:
+                15px;
+
+            padding-top:
+                12px;
         }
 
 
-        #speedControl {
+        #speed {
 
             width: 100%;
 
             margin:
-                8px 0 12px;
+                10px 0;
+        }
+
+
+        #speedText {
+
+            color:
+                #79c9ff;
         }
 
 
 
-        /* ===============================
-           PLANET INFORMATION
-           =============================== */
+        /* =====================================================
+           RIGHT INFORMATION PANEL
+           ===================================================== */
 
-        #planet-info {
+        #planetInfo {
 
             position: fixed;
 
-            right: 20px;
             top: 20px;
+            right: 20px;
 
             width: 240px;
 
             padding: 18px;
 
-            z-index: 10;
+            z-index: 100;
 
             display: none;
 
+            border-radius:
+                18px;
+
             background:
                 rgba(
-                    5,
-                    15,
-                    35,
-                    0.78
+                    2,
+                    13,
+                    32,
+                    0.82
                 );
-
-            border:
-                1px solid #31527a;
-
-            border-radius: 16px;
 
             backdrop-filter:
-                blur(12px);
+                blur(14px);
 
-            box-shadow:
-                0 0 30px
+            border:
+                1px solid
                 rgba(
-                    0,
-                    120,
+                    80,
+                    160,
                     255,
-                    0.15
+                    0.40
                 );
         }
 
 
-        #planet-info h2 {
+        #planetInfo h2 {
+
+            color: #78c7ff;
 
             margin-top: 0;
-
-            color: #84ccff;
         }
 
 
-        #planet-info p {
+        #planetInfo p {
 
-            color: #c7d6eb;
+            color: #d1dded;
 
-            font-size: 13px;
+            font-size:
+                13px;
 
-            line-height: 1.5;
+            line-height:
+                1.5;
         }
 
 
-        /* Small label */
+
+        /* =====================================================
+           TITLE AT BOTTOM
+           ===================================================== */
 
         #footer {
 
             position: fixed;
 
-            bottom: 15px;
             right: 20px;
+            bottom: 15px;
 
-            color: #7187a3;
+            z-index: 100;
 
-            font-size: 11px;
+            color:
+                #71839d;
 
-            z-index: 10;
+            font-size:
+                11px;
+        }
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            #panel {
+
+                width:
+                    calc(
+                        100%
+                        - 30px
+                    );
+
+                left: 15px;
+                top: 15px;
+
+            }
+
+
+            #planetInfo {
+
+                top: auto;
+
+                right: 15px;
+                bottom: 15px;
+
+            }
+
         }
 
     </style>
@@ -286,46 +369,62 @@
 <body>
 
 
-    <!-- ==========================================
-         LEFT USER INTERFACE
-         ========================================== -->
+    <!-- =====================================================
+         USER INTERFACE
+         ===================================================== -->
+
 
     <div id="panel">
 
+
         <h1>
+
             ☀️ 3D Solar System
+
         </h1>
 
 
-        <p>
-            🖱️ Left drag → Rotate
-        </p>
+        <div class="instruction">
 
-        <p>
-            🔎 Mouse wheel → Zoom
-        </p>
+            🖱 Drag → Rotate around Solar System
 
-        <p>
-            🖱️ Right drag → Pan
-        </p>
-
-        <p>
-            🪐 Click a planet → Visit it
-        </p>
+        </div>
 
 
-        <div id="planet-buttons"></div>
+        <div class="instruction">
+
+            🔎 Mouse Wheel → Zoom
+
+        </div>
 
 
-        <div id="controls">
+        <div class="instruction">
 
-            <p>
-                ⏱ Simulation Speed
-            </p>
+            🪐 Click planet or button → Visit
+
+        </div>
+
+
+
+        <div id="planetButtons"></div>
+
+
+
+        <div id="simulationControls">
+
+
+            <div>
+
+                ⏱ Speed:
+                <span id="speedText">
+                    1.0x
+                </span>
+
+            </div>
 
 
             <input
-                id="speedControl"
+                id="speed"
                 type="range"
                 min="0"
                 max="5"
@@ -334,105 +433,97 @@
             >
 
 
-            <button id="pauseButton">
+            <button id="pause">
+
                 ⏸ Pause
+
             </button>
 
 
-            <button id="homeButton">
+            <button id="home">
+
                 🌌 Solar System
+
             </button>
+
 
         </div>
+
 
     </div>
 
 
 
-    <!-- Planet details -->
+    <div id="planetInfo"></div>
 
-    <div id="planet-info"></div>
 
 
     <div id="footer">
 
-        3D Solar System Learning Model • Not to scale
+        Interactive Solar System • Visualization not to scale
 
     </div>
 
 
 
-    <!-- ==========================================
-         THREE.JS IMPORT
-         ========================================== -->
+    <!-- =====================================================
+         EVERYTHING BELOW IS JAVASCRIPT
+         ===================================================== -->
 
-    <script type="importmap">
-
-    {
-        "imports": {
-
-            "three":
-            "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-
-            "three/addons/":
-            "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
-        }
-    }
-
-    </script>
-
-
-
-    <!-- ==========================================
-         JAVASCRIPT
-         ========================================== -->
 
     <script type="module">
 
 
-        import * as THREE from "three";
+        /*
+         * =====================================================
+         * LOAD THREE.JS
+         * =====================================================
+         *
+         * We use ONE direct CDN import.
+         *
+         * No import map.
+         * No OrbitControls.
+         * No external JavaScript files.
+         */
 
 
-        import {
-
-            OrbitControls
-
-        } from
-
-        "three/addons/controls/OrbitControls.js";
+        import * as THREE from
+        "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
 
 
 
         /*
-        =========================================================
-        1. BASIC THREE.JS SETUP
-        =========================================================
-        */
+         * =====================================================
+         * SCENE
+         * =====================================================
+         */
 
 
         const scene =
             new THREE.Scene();
 
 
-        scene.fog =
-            new THREE.FogExp2(
-                0x010207,
-                0.0007
+        scene.background =
+            new THREE.Color(
+                0x000008
             );
 
 
 
         /*
-        Camera = user's eyes
-        */
+         * =====================================================
+         * CAMERA
+         * =====================================================
+         */
 
 
         const camera =
             new THREE.PerspectiveCamera(
 
-                55,
+                60,
 
-                window.innerWidth /
+                window.innerWidth
+                /
                 window.innerHeight,
 
                 0.1,
@@ -442,17 +533,28 @@
             );
 
 
+
+        /*
+         * Camera starts looking
+         * down at Solar System.
+         */
+
+
         camera.position.set(
+
             0,
             65,
-            125
+            120
+
         );
 
 
 
         /*
-        Renderer draws the scene.
-        */
+         * =====================================================
+         * RENDERER
+         * =====================================================
+         */
 
 
         const renderer =
@@ -463,6 +565,7 @@
             });
 
 
+
         renderer.setSize(
 
             window.innerWidth,
@@ -470,6 +573,7 @@
             window.innerHeight
 
         );
+
 
 
         renderer.setPixelRatio(
@@ -485,83 +589,408 @@
         );
 
 
-        renderer.outputColorSpace =
-            THREE.SRGBColorSpace;
 
+        document.body.insertBefore(
 
-        document.body.appendChild(
+            renderer.domElement,
 
-            renderer.domElement
+            document.body.firstChild
 
         );
 
 
 
         /*
-        =========================================================
-        2. CAMERA CONTROLS
-        =========================================================
-        */
+         * =====================================================
+         * CUSTOM CAMERA CONTROLS
+         * =====================================================
+         *
+         * We implement controls ourselves.
+         *
+         * This removes OrbitControls completely.
+         */
 
 
-        const controls =
-            new OrbitControls(
+        let cameraRadius =
+            137;
 
-                camera,
 
-                renderer.domElement
+        let cameraTheta =
+            0;
+
+
+        let cameraPhi =
+            1.05;
+
+
+
+        const cameraTarget =
+            new THREE.Vector3(
+
+                0,
+                0,
+                0
 
             );
 
 
-        controls.enableDamping =
-            true;
+
+        let dragging =
+            false;
 
 
-        controls.dampingFactor =
-            0.05;
+        let previousMouseX =
+            0;
 
 
-        controls.minDistance =
-            5;
+        let previousMouseY =
+            0;
 
 
-        controls.maxDistance =
-            500;
+
+        function updateCamera() {
+
+
+            /*
+             * Convert spherical coordinates
+             * into X/Y/Z position.
+             */
+
+
+            const sinPhi =
+                Math.sin(
+                    cameraPhi
+                );
+
+
+
+            camera.position.x =
+
+                cameraTarget.x
+
+                +
+
+                cameraRadius
+
+                *
+
+                sinPhi
+
+                *
+
+                Math.sin(
+                    cameraTheta
+                );
+
+
+
+            camera.position.y =
+
+                cameraTarget.y
+
+                +
+
+                cameraRadius
+
+                *
+
+                Math.cos(
+                    cameraPhi
+                );
+
+
+
+            camera.position.z =
+
+                cameraTarget.z
+
+                +
+
+                cameraRadius
+
+                *
+
+                sinPhi
+
+                *
+
+                Math.cos(
+                    cameraTheta
+                );
+
+
+
+            camera.lookAt(
+                cameraTarget
+            );
+
+        }
+
+
+
+        updateCamera();
 
 
 
         /*
-        =========================================================
-        3. STAR FIELD
-        =========================================================
-        */
+         * Mouse down
+         */
 
 
-        const starPositions = [];
+        renderer.domElement
+            .addEventListener(
+
+                "mousedown",
+
+                function(event) {
+
+
+                    dragging =
+                        true;
+
+
+                    previousMouseX =
+                        event.clientX;
+
+
+                    previousMouseY =
+                        event.clientY;
+
+                }
+
+            );
+
+
+
+        /*
+         * Mouse released
+         */
+
+
+        window.addEventListener(
+
+            "mouseup",
+
+            function() {
+
+
+                dragging =
+                    false;
+
+            }
+
+        );
+
+
+
+        /*
+         * Rotate camera
+         */
+
+
+        window.addEventListener(
+
+            "mousemove",
+
+            function(event) {
+
+
+                if (
+                    !dragging
+                ) {
+
+                    return;
+
+                }
+
+
+                const deltaX =
+
+                    event.clientX
+
+                    -
+
+                    previousMouseX;
+
+
+
+                const deltaY =
+
+                    event.clientY
+
+                    -
+
+                    previousMouseY;
+
+
+
+                cameraTheta -=
+
+                    deltaX
+                    *
+                    0.005;
+
+
+
+                cameraPhi +=
+
+                    deltaY
+                    *
+                    0.005;
+
+
+
+                /*
+                 * Prevent camera
+                 * flipping upside down.
+                 */
+
+
+                cameraPhi =
+
+                    Math.max(
+
+                        0.12,
+
+                        Math.min(
+
+                            Math.PI
+                            -
+                            0.12,
+
+                            cameraPhi
+
+                        )
+
+                    );
+
+
+
+                previousMouseX =
+                    event.clientX;
+
+
+                previousMouseY =
+                    event.clientY;
+
+
+
+                updateCamera();
+
+            }
+
+        );
+
+
+
+        /*
+         * Mouse wheel = zoom.
+         */
+
+
+        renderer.domElement
+            .addEventListener(
+
+                "wheel",
+
+                function(event) {
+
+
+                    event.preventDefault();
+
+
+
+                    cameraRadius +=
+
+                        event.deltaY
+                        *
+                        0.05;
+
+
+
+                    cameraRadius =
+
+                        Math.max(
+
+                            4,
+
+                            Math.min(
+
+                                450,
+
+                                cameraRadius
+
+                            )
+
+                        );
+
+
+
+                    updateCamera();
+
+                },
+
+                {
+                    passive: false
+                }
+
+            );
+
+
+
+        /*
+         * =====================================================
+         * STARS
+         * =====================================================
+         */
+
+
+        const starGeometry =
+            new THREE.BufferGeometry();
+
+
+
+        const starPositions =
+            [];
+
+
+
+        const starColors =
+            [];
+
 
 
         for (
             let i = 0;
-            i < 6000;
+            i < 7000;
             i++
         ) {
 
 
-            const distance =
+            /*
+             * Put stars around
+             * the Solar System.
+             */
 
-                350 +
 
-                Math.random() *
-                800;
+            const radius =
+
+                250
+
+                +
+
+                Math.random()
+                *
+                900;
 
 
 
             const theta =
 
-                Math.random() *
-
-                Math.PI *
+                Math.random()
+                *
+                Math.PI
+                *
                 2;
 
 
@@ -570,7 +999,8 @@
 
                 Math.acos(
 
-                    2 *
+                    2
+                    *
                     Math.random()
                     -
                     1
@@ -579,48 +1009,91 @@
 
 
 
-            const x =
-
-                distance *
-
-                Math.sin(phi) *
-
-                Math.cos(theta);
-
-
-
-            const y =
-
-                distance *
-
-                Math.cos(phi);
-
-
-
-            const z =
-
-                distance *
-
-                Math.sin(phi) *
-
-                Math.sin(theta);
-
-
-
             starPositions.push(
 
-                x,
-                y,
-                z
+
+                radius
+                *
+                Math.sin(phi)
+                *
+                Math.cos(theta),
+
+
+                radius
+                *
+                Math.cos(phi),
+
+
+                radius
+                *
+                Math.sin(phi)
+                *
+                Math.sin(theta)
 
             );
 
+
+
+            /*
+             * Slightly different colors.
+             */
+
+
+            const starType =
+                Math.random();
+
+
+
+            if (
+                starType < 0.15
+            ) {
+
+                /*
+                 * Blue star
+                 */
+
+                starColors.push(
+
+                    0.45,
+                    0.65,
+                    1
+
+                );
+
+            }
+
+            else if (
+                starType < 0.30
+            ) {
+
+                /*
+                 * Yellow star
+                 */
+
+                starColors.push(
+
+                    1,
+                    0.85,
+                    0.55
+
+                );
+
+            }
+
+            else {
+
+                starColors.push(
+
+                    1,
+                    1,
+                    1
+
+                );
+
+            }
+
         }
 
-
-
-        const starGeometry =
-            new THREE.BufferGeometry();
 
 
         starGeometry.setAttribute(
@@ -639,12 +1112,28 @@
 
 
 
+        starGeometry.setAttribute(
+
+            "color",
+
+            new THREE.Float32BufferAttribute(
+
+                starColors,
+
+                3
+
+            )
+
+        );
+
+
+
         const starMaterial =
             new THREE.PointsMaterial({
 
-                color: 0xffffff,
+                size: 1.1,
 
-                size: 0.85,
+                vertexColors: true,
 
                 transparent: true,
 
@@ -664,125 +1153,135 @@
             );
 
 
-        scene.add(stars);
+
+        scene.add(
+            stars
+        );
 
 
 
         /*
-        =========================================================
-        4. GALAXY
-        =========================================================
-        */
+         * =====================================================
+         * GALAXY
+         * =====================================================
+         */
 
 
-        const galaxyPositions = [];
+        const galaxyGeometry =
+            new THREE.BufferGeometry();
 
-        const galaxyColors = [];
+
+        const galaxyPositions =
+            [];
 
 
-        const galaxyCount =
-            18000;
+        const galaxyColors =
+            [];
+
+
+
+        const innerGalaxyColor =
+            new THREE.Color(
+                0xffcc88
+            );
+
+
+        const outerGalaxyColor =
+            new THREE.Color(
+                0x3355ff
+            );
+
+
+
+        const galaxyParticleCount =
+            14000;
 
 
         const galaxyRadius =
             500;
 
 
-        const galaxyBranches =
+        const galaxyArms =
             5;
-
-
-
-        const insideColor =
-            new THREE.Color(
-                0xffbb88
-            );
-
-
-        const outsideColor =
-            new THREE.Color(
-                0x334cff
-            );
 
 
 
         for (
             let i = 0;
-            i < galaxyCount;
+            i < galaxyParticleCount;
             i++
         ) {
 
 
+            /*
+             * More stars toward
+             * galaxy centre.
+             */
+
+
             const radius =
 
-                Math.random() *
+                Math.pow(
+
+                    Math.random(),
+
+                    1.5
+
+                )
+
+                *
 
                 galaxyRadius;
 
 
 
-            const branchAngle =
+            /*
+             * Assign particle
+             * to spiral arm.
+             */
+
+
+            const armAngle =
 
                 (
 
-                    i %
-
-                    galaxyBranches
+                    i
+                    %
+                    galaxyArms
 
                 )
 
                 /
 
-                galaxyBranches
+                galaxyArms
 
                 *
 
-                Math.PI *
-
+                Math.PI
+                *
                 2;
 
 
 
-            const spinAngle =
+            /*
+             * Make arm curve.
+             */
 
-                radius *
 
-                0.025;
+            const spin =
+
+                radius
+                *
+                0.018;
 
 
 
             /*
-            Randomness makes it look organic.
-            */
+             * Random spread.
+             */
 
 
-            const randomX =
-
-                (
-
-                    Math.random()
-                    -
-                    0.5
-
-                )
-
-                *
-
-                Math.pow(
-
-                    Math.random(),
-
-                    2
-
-                )
-
-                *
-
-                70;
-
-
-
-            const randomY =
+            const randomness =
 
                 (
 
@@ -794,33 +1293,17 @@
 
                 *
 
-                18;
-
-
-
-            const randomZ =
-
                 (
 
-                    Math.random()
-                    -
-                    0.5
+                    12
 
-                )
+                    +
 
-                *
+                    radius
+                    *
+                    0.12
 
-                Math.pow(
-
-                    Math.random(),
-
-                    2
-
-                )
-
-                *
-
-                70;
+                );
 
 
 
@@ -828,24 +1311,18 @@
 
                 Math.cos(
 
-                    branchAngle
+                    armAngle
                     +
-                    spinAngle
+                    spin
 
                 )
 
                 *
-
                 radius
 
                 +
 
-                randomX;
-
-
-
-            const y =
-                randomY;
+                randomness;
 
 
 
@@ -853,19 +1330,44 @@
 
                 Math.sin(
 
-                    branchAngle
+                    armAngle
                     +
-                    spinAngle
+                    spin
+
+                )
+
+                *
+                radius
+
+                +
+
+                randomness;
+
+
+
+            const y =
+
+                (
+
+                    Math.random()
+                    -
+                    0.5
 
                 )
 
                 *
 
-                radius
+                (
 
-                +
+                    5
 
-                randomZ;
+                    +
+
+                    radius
+                    *
+                    0.035
+
+                );
 
 
 
@@ -880,22 +1382,23 @@
 
 
             /*
-            Galaxy changes from warm color
-            near center to blue outside.
-            */
+             * Galaxy colour.
+             */
 
 
             const color =
 
-                insideColor.clone();
+                innerGalaxyColor
+                    .clone();
 
 
 
             color.lerp(
 
-                outsideColor,
+                outerGalaxyColor,
 
-                radius /
+                radius
+                /
                 galaxyRadius
 
             );
@@ -905,19 +1408,12 @@
             galaxyColors.push(
 
                 color.r,
-
                 color.g,
-
                 color.b
 
             );
 
         }
-
-
-
-        const galaxyGeometry =
-            new THREE.BufferGeometry();
 
 
 
@@ -956,13 +1452,13 @@
         const galaxyMaterial =
             new THREE.PointsMaterial({
 
-                size: 1.25,
+                size: 0.7,
 
                 vertexColors: true,
 
                 transparent: true,
 
-                opacity: 0.65,
+                opacity: 0.38,
 
                 blending:
                     THREE.AdditiveBlending,
@@ -984,9 +1480,13 @@
 
 
 
+        /*
+         * Give galaxy slight tilt.
+         */
+
+
         galaxy.rotation.x =
-            Math.PI *
-            0.08;
+            0.12;
 
 
 
@@ -997,66 +1497,148 @@
 
 
         /*
-        =========================================================
-        5. SPACE DUST
-        =========================================================
-        */
+         * =====================================================
+         * SUN
+         * =====================================================
+         */
 
 
-        const dustPositions = [];
+        const sun =
+            new THREE.Mesh(
 
+                new THREE.SphereGeometry(
 
-        for (
-            let i = 0;
-            i < 3000;
-            i++
-        ) {
+                    7,
 
+                    48,
 
-            dustPositions.push(
+                    48
 
-                (
-                    Math.random()
-                    -
-                    0.5
+                ),
 
-                ) * 500,
+                new THREE.MeshBasicMaterial({
 
+                    color:
+                        0xffaa00
 
-                (
-                    Math.random()
-                    -
-                    0.5
-
-                ) * 200,
-
-
-                (
-                    Math.random()
-                    -
-                    0.5
-
-                ) * 500
+                })
 
             );
 
-        }
+
+
+        scene.add(
+            sun
+        );
 
 
 
-        const dustGeometry =
-            new THREE.BufferGeometry();
+        /*
+         * =====================================================
+         * SUN GLOW
+         * =====================================================
+         */
 
 
-        dustGeometry.setAttribute(
+        const sunGlow =
+            new THREE.Mesh(
 
-            "position",
+                new THREE.SphereGeometry(
 
-            new THREE.Float32BufferAttribute(
+                    9,
 
-                dustPositions,
+                    40,
 
-                3
+                    40
+
+                ),
+
+                new THREE.MeshBasicMaterial({
+
+                    color:
+                        0xff6600,
+
+                    transparent:
+                        true,
+
+                    opacity:
+                        0.25,
+
+                    blending:
+                        THREE.AdditiveBlending,
+
+                    side:
+                        THREE.BackSide
+
+                })
+
+            );
+
+
+
+        scene.add(
+            sunGlow
+        );
+
+
+
+        const outerSunGlow =
+            new THREE.Mesh(
+
+                new THREE.SphereGeometry(
+
+                    12,
+
+                    40,
+
+                    40
+
+                ),
+
+                new THREE.MeshBasicMaterial({
+
+                    color:
+                        0xff3300,
+
+                    transparent:
+                        true,
+
+                    opacity:
+                        0.08,
+
+                    blending:
+                        THREE.AdditiveBlending,
+
+                    side:
+                        THREE.BackSide
+
+                })
+
+            );
+
+
+
+        scene.add(
+            outerSunGlow
+        );
+
+
+
+        /*
+         * Sun provides lighting
+         * for all planets.
+         */
+
+
+        scene.add(
+
+            new THREE.PointLight(
+
+                0xffffff,
+
+                1100,
+
+                500
 
             )
 
@@ -1064,49 +1646,19 @@
 
 
 
-        const dustMaterial =
-            new THREE.PointsMaterial({
-
-                color: 0x7098cc,
-
-                size: 0.16,
-
-                transparent: true,
-
-                opacity: 0.4
-
-            });
-
-
-
-        const spaceDust =
-            new THREE.Points(
-
-                dustGeometry,
-
-                dustMaterial
-
-            );
-
-
-        scene.add(
-            spaceDust
-        );
-
-
-
         /*
-        =========================================================
-        6. LIGHT
-        =========================================================
-        */
+         * Very weak ambient light.
+         *
+         * Stops back side of planets
+         * becoming completely invisible.
+         */
 
 
         scene.add(
 
             new THREE.AmbientLight(
 
-                0x304060,
+                0x35445f,
 
                 0.55
 
@@ -1117,345 +1669,217 @@
 
 
         /*
-        =========================================================
-        7. SUN
-        =========================================================
-        */
-
-
-        const sun =
-            new THREE.Mesh(
-
-                new THREE.SphereGeometry(
-
-                    7,
-                    48,
-                    48
-
-                ),
-
-                new THREE.MeshBasicMaterial({
-
-                    color:
-                        0xffaa22
-
-                })
-
-            );
-
-
-        scene.add(
-            sun
-        );
-
-
-
-        /*
-        Sun light illuminates planets.
-        */
-
-
-        const sunLight =
-            new THREE.PointLight(
-
-                0xffffff,
-
-                1000,
-
-                700
-
-            );
-
-
-        scene.add(
-            sunLight
-        );
-
-
-
-        /*
-        =========================================================
-        8. SUN GLOW EFFECT
-        =========================================================
-        */
-
-
-        const glow1 =
-            new THREE.Mesh(
-
-                new THREE.SphereGeometry(
-
-                    8.5,
-                    32,
-                    32
-
-                ),
-
-                new THREE.MeshBasicMaterial({
-
-                    color:
-                        0xff8800,
-
-                    transparent:
-                        true,
-
-                    opacity:
-                        0.22,
-
-                    blending:
-                        THREE.AdditiveBlending,
-
-                    side:
-                        THREE.BackSide
-
-                })
-
-            );
-
-
-
-        scene.add(
-            glow1
-        );
-
-
-
-        const glow2 =
-            new THREE.Mesh(
-
-                new THREE.SphereGeometry(
-
-                    11,
-                    32,
-                    32
-
-                ),
-
-                new THREE.MeshBasicMaterial({
-
-                    color:
-                        0xff4400,
-
-                    transparent:
-                        true,
-
-                    opacity:
-                        0.10,
-
-                    blending:
-                        THREE.AdditiveBlending,
-
-                    side:
-                        THREE.BackSide
-
-                })
-
-            );
-
-
-
-        scene.add(
-            glow2
-        );
-
-
-
-        /*
-        =========================================================
-        9. PLANET DATA
-        =========================================================
-        */
+         * =====================================================
+         * PLANET DATA
+         * =====================================================
+         */
 
 
         const planetData = [
 
 
             {
+
                 name:
                     "Mercury",
 
                 size:
-                    0.8,
+                    1.0,
 
                 distance:
-                    12,
+                    13,
 
                 color:
-                    0x9b938c,
+                    0x999999,
 
                 speed:
-                    4.15
+                    4.1
+
             },
 
 
             {
+
                 name:
                     "Venus",
 
                 size:
-                    1.3,
+                    1.5,
 
                 distance:
-                    18,
+                    19,
 
                 color:
-                    0xd9a05b,
+                    0xd9a15c,
 
                 speed:
-                    1.62
+                    1.6
+
             },
 
 
             {
+
                 name:
                     "Earth",
 
                 size:
-                    1.45,
+                    1.6,
 
                 distance:
-                    25,
+                    27,
 
                 color:
-                    0x2874d8,
+                    0x1677dd,
 
                 speed:
                     1
+
             },
 
 
             {
+
                 name:
                     "Mars",
 
                 size:
-                    1.05,
+                    1.25,
 
                 distance:
-                    32,
+                    35,
 
                 color:
-                    0xc85b35,
+                    0xd45b36,
 
                 speed:
                     0.53
+
             },
 
 
             {
+
                 name:
                     "Jupiter",
 
                 size:
-                    3.7,
+                    4.2,
 
                 distance:
-                    44,
+                    49,
 
                 color:
-                    0xcfa47e,
+                    0xd0a47e,
 
                 speed:
                     0.084
+
             },
 
 
             {
+
                 name:
                     "Saturn",
 
                 size:
-                    3.1,
+                    3.6,
 
                 distance:
-                    57,
+                    64,
 
                 color:
-                    0xdac58d,
+                    0xd9c288,
 
                 speed:
                     0.034
+
             },
 
 
             {
+
                 name:
                     "Uranus",
 
                 size:
-                    2.2,
+                    2.6,
 
                 distance:
-                    69,
+                    78,
 
                 color:
-                    0x80dce5,
+                    0x77dce6,
 
                 speed:
                     0.012
+
             },
 
 
             {
+
                 name:
                     "Neptune",
 
                 size:
-                    2.2,
+                    2.5,
 
                 distance:
-                    80,
+                    91,
 
                 color:
-                    0x3158d4,
+                    0x315bd7,
 
                 speed:
                     0.006
+
             }
 
         ];
 
 
 
-        const planets = [];
+        const planets =
+            [];
 
 
 
         /*
-        =========================================================
-        10. CREATE ORBIT
-        =========================================================
-        */
+         * =====================================================
+         * CREATE ORBIT LINE
+         * =====================================================
+         */
 
 
         function createOrbit(
-            distance
+            radius
         ) {
 
 
-            const points = [];
+            const points =
+                [];
 
 
             for (
                 let i = 0;
-                i <= 150;
+                i <= 180;
                 i++
             ) {
 
 
                 const angle =
 
-                    (
-
-                        i /
-                        150
-
-                    )
+                    i
+                    /
+                    180
 
                     *
 
-                    Math.PI *
+                    Math.PI
 
+                    *
                     2;
 
 
@@ -1466,13 +1890,13 @@
 
                         Math.cos(angle)
                         *
-                        distance,
+                        radius,
 
                         0,
 
                         Math.sin(angle)
                         *
-                        distance
+                        radius
 
                     )
 
@@ -1492,37 +1916,31 @@
 
 
 
-            const material =
-
-                new THREE.LineBasicMaterial({
-
-                    color:
-                        0x31547a,
-
-                    transparent:
-                        true,
-
-                    opacity:
-                        0.45
-
-                });
-
-
-
-            const orbit =
+            const line =
 
                 new THREE.Line(
 
                     geometry,
 
-                    material
+                    new THREE.LineBasicMaterial({
+
+                        color:
+                            0x2d4764,
+
+                        transparent:
+                            true,
+
+                        opacity:
+                            0.60
+
+                    })
 
                 );
 
 
 
             scene.add(
-                orbit
+                line
             );
 
         }
@@ -1530,15 +1948,15 @@
 
 
         /*
-        =========================================================
-        11. CREATE ALL PLANETS
-        =========================================================
-        */
+         * =====================================================
+         * GENERATE PLANETS
+         * =====================================================
+         */
 
 
         planetData.forEach(
 
-            function (data) {
+            function(data) {
 
 
                 createOrbit(
@@ -1548,17 +1966,11 @@
 
 
                 /*
-                PIVOT
-
-                Sun
-                 │
-                 └── Pivot
-                       │
-                       └── Planet
-
-                Rotating the pivot makes
-                the planet orbit the Sun.
-                */
+                 * Pivot goes at Sun.
+                 *
+                 * Rotating pivot =
+                 * orbiting planet.
+                 */
 
 
                 const pivot =
@@ -1572,57 +1984,45 @@
 
 
 
-                const geometry =
-
-                    new THREE.SphereGeometry(
-
-                        data.size,
-
-                        32,
-
-                        32
-
-                    );
-
-
-
-                const material =
-
-                    new THREE.MeshStandardMaterial({
-
-                        color:
-                            data.color,
-
-                        roughness:
-                            0.75,
-
-                        metalness:
-                            0.05
-
-                    });
-
-
-
                 const planet =
-
                     new THREE.Mesh(
 
-                        geometry,
+                        new THREE.SphereGeometry(
 
-                        material
+                            data.size,
+
+                            32,
+
+                            32
+
+                        ),
+
+                        new THREE.MeshStandardMaterial({
+
+                            color:
+                                data.color,
+
+                            roughness:
+                                0.75
+
+                        })
 
                     );
 
+
+
+                /*
+                 * Move planet away
+                 * from Sun.
+                 */
 
 
                 planet.position.x =
-
                     data.distance;
 
 
 
                 planet.userData =
-
                     data;
 
 
@@ -1636,7 +2036,6 @@
                     Math.PI
 
                     *
-
                     2;
 
 
@@ -1648,78 +2047,10 @@
 
 
                 /*
-                ==========================
-                SATURN RINGS
-                ==========================
-                */
-
-
-                if (
-                    data.name
-                    ===
-                    "Saturn"
-                ) {
-
-
-                    const rings =
-
-                        new THREE.Mesh(
-
-                            new THREE.RingGeometry(
-
-                                data.size
-                                *
-                                1.4,
-
-                                data.size
-                                *
-                                2.3,
-
-                                80
-
-                            ),
-
-                            new THREE.MeshBasicMaterial({
-
-                                color:
-                                    0xd2be92,
-
-                                transparent:
-                                    true,
-
-                                opacity:
-                                    0.7,
-
-                                side:
-                                    THREE.DoubleSide
-
-                            })
-
-                        );
-
-
-
-                    rings.rotation.x =
-
-                        Math.PI
-                        /
-                        2;
-
-
-
-                    planet.add(
-                        rings
-                    );
-
-                }
-
-
-
-                /*
-                ==========================
-                EARTH MOON
-                ==========================
-                */
+                 * =============================================
+                 * EARTH FEATURES
+                 * =============================================
+                 */
 
 
                 if (
@@ -1729,8 +2060,67 @@
                 ) {
 
 
-                    const moonPivot =
+                    /*
+                     * Green land-like patches.
+                     */
 
+
+                    const land =
+                        new THREE.Mesh(
+
+                            new THREE.SphereGeometry(
+
+                                data.size
+                                *
+                                1.012,
+
+                                20,
+
+                                20,
+
+                                0,
+
+                                Math.PI
+                                *
+                                0.7,
+
+                                0.4,
+
+                                Math.PI
+                                *
+                                0.5
+
+                            ),
+
+                            new THREE.MeshBasicMaterial({
+
+                                color:
+                                    0x35a95c,
+
+                                transparent:
+                                    true,
+
+                                opacity:
+                                    0.8
+
+                            })
+
+                        );
+
+
+
+                    planet.add(
+                        land
+                    );
+
+
+
+                    /*
+                     * Moon pivot.
+                     */
+
+
+                    const moonPivot =
                         new THREE.Object3D();
 
 
@@ -1742,12 +2132,11 @@
 
 
                     const moon =
-
                         new THREE.Mesh(
 
                             new THREE.SphereGeometry(
 
-                                0.36,
+                                0.40,
 
                                 20,
 
@@ -1758,10 +2147,7 @@
                             new THREE.MeshStandardMaterial({
 
                                 color:
-                                    0xaaaaaa,
-
-                                roughness:
-                                    1
+                                    0xbababa
 
                             })
 
@@ -1770,7 +2156,7 @@
 
 
                     moon.position.x =
-                        3.2;
+                        3.5;
 
 
 
@@ -1780,9 +2166,73 @@
 
 
 
-                    planet.userData.moonPivot =
+                    planet.userData
+                        .moonPivot =
+                            moonPivot;
 
-                        moonPivot;
+                }
+
+
+
+                /*
+                 * =============================================
+                 * SATURN RINGS
+                 * =============================================
+                 */
+
+
+                if (
+                    data.name
+                    ===
+                    "Saturn"
+                ) {
+
+
+                    const ring =
+
+                        new THREE.Mesh(
+
+                            new THREE.RingGeometry(
+
+                                4.7,
+
+                                7.2,
+
+                                80
+
+                            ),
+
+                            new THREE.MeshBasicMaterial({
+
+                                color:
+                                    0xdac999,
+
+                                transparent:
+                                    true,
+
+                                opacity:
+                                    0.72,
+
+                                side:
+                                    THREE.DoubleSide
+
+                            })
+
+                        );
+
+
+
+                    ring.rotation.x =
+
+                        Math.PI
+                        /
+                        2;
+
+
+
+                    planet.add(
+                        ring
+                    );
 
                 }
 
@@ -1790,16 +2240,13 @@
 
                 planets.push({
 
-                    planet:
-
+                    mesh:
                         planet,
 
                     pivot:
-
                         pivot,
 
                     speed:
-
                         data.speed
 
                 });
@@ -1807,44 +2254,44 @@
 
 
                 /*
-                ==========================
-                CREATE HTML BUTTON
-                ==========================
-                */
+                 * =============================================
+                 * CREATE PLANET BUTTON
+                 * =============================================
+                 */
 
 
                 const button =
-
                     document.createElement(
-
                         "button"
-
                     );
 
 
 
                 button.textContent =
-
                     data.name;
 
 
 
-                button.onclick =
+                button.addEventListener(
 
-                    function () {
+                    "click",
+
+                    function() {
 
 
                         focusPlanet(
                             planet
                         );
 
-                    };
+                    }
+
+                );
 
 
 
                 document
                     .getElementById(
-                        "planet-buttons"
+                        "planetButtons"
                     )
                     .appendChild(
                         button
@@ -1857,17 +2304,17 @@
 
 
         /*
-        =========================================================
-        12. ASTEROID BELT
-        =========================================================
-        */
+         * =====================================================
+         * ASTEROID BELT
+         * =====================================================
+         */
 
 
         const asteroidGeometry =
 
             new THREE.IcosahedronGeometry(
 
-                0.15,
+                0.14,
 
                 0
 
@@ -1889,15 +2336,25 @@
 
 
 
+        const asteroidGroup =
+            new THREE.Group();
+
+
+
+        scene.add(
+            asteroidGroup
+        );
+
+
+
         for (
             let i = 0;
-            i < 700;
+            i < 450;
             i++
         ) {
 
 
             const asteroid =
-
                 new THREE.Mesh(
 
                     asteroidGeometry,
@@ -1911,16 +2368,21 @@
             const angle =
 
                 Math.random()
+
                 *
+
                 Math.PI
+
                 *
                 2;
 
 
 
-            const distance =
+            const radius =
 
-                35 +
+                39
+
+                +
 
                 Math.random()
                 *
@@ -1932,7 +2394,7 @@
 
                 Math.cos(angle)
                 *
-                distance,
+                radius,
 
 
                 (
@@ -1947,27 +2409,25 @@
 
                 Math.sin(angle)
                 *
-                distance
+                radius
 
             );
-
-
-
-            const scale =
-
-                0.4 +
-
-                Math.random();
 
 
 
             asteroid.scale.setScalar(
-                scale
+
+                0.4
+                +
+                Math.random()
+                *
+                1.3
+
             );
 
 
 
-            scene.add(
+            asteroidGroup.add(
                 asteroid
             );
 
@@ -1976,37 +2436,36 @@
 
 
         /*
-        =========================================================
-        13. METEORS
-        =========================================================
-        */
+         * =====================================================
+         * METEORS
+         * =====================================================
+         */
 
 
-        const meteors = [];
+        const meteors =
+            [];
 
 
 
         function createMeteor() {
 
 
-            const meteorGroup =
-
+            const meteor =
                 new THREE.Group();
 
 
 
             /*
-            Bright meteor head.
-            */
+             * Meteor head.
+             */
 
 
             const head =
-
                 new THREE.Mesh(
 
                     new THREE.SphereGeometry(
 
-                        0.35,
+                        0.45,
 
                         12,
 
@@ -2025,95 +2484,115 @@
 
 
 
-            meteorGroup.add(
+            meteor.add(
                 head
             );
 
 
 
             /*
-            Blue glowing trail.
-            */
+             * Create meteor trail
+             * using several transparent spheres.
+             */
 
 
-            const trail =
+            for (
+                let i = 1;
+                i <= 14;
+                i++
+            ) {
 
-                new THREE.Mesh(
 
-                    new THREE.CylinderGeometry(
+                const particle =
 
-                        0.03,
+                    new THREE.Mesh(
 
-                        0.30,
+                        new THREE.SphereGeometry(
 
-                        12,
+                            Math.max(
 
-                        8
+                                0.03,
 
-                    ),
+                                0.32
+                                -
+                                i
+                                *
+                                0.02
 
-                    new THREE.MeshBasicMaterial({
+                            ),
 
-                        color:
-                            0x66ccff,
+                            8,
 
-                        transparent:
-                            true,
+                            8
 
-                        opacity:
-                            0.65,
+                        ),
 
-                        blending:
-                            THREE.AdditiveBlending
+                        new THREE.MeshBasicMaterial({
 
-                    })
+                            color:
 
+                                i < 5
+
+                                ?
+
+                                0x99ddff
+
+                                :
+
+                                0x3377ff,
+
+                            transparent:
+                                true,
+
+                            opacity:
+
+                                Math.max(
+
+                                    0.03,
+
+                                    0.65
+                                    -
+                                    i
+                                    *
+                                    0.04
+
+                                ),
+
+                            blending:
+                                THREE.AdditiveBlending
+
+                        })
+
+                    );
+
+
+
+                particle.position.x =
+
+                    -i
+                    *
+                    0.7;
+
+
+
+                meteor.add(
+                    particle
                 );
 
-
-
-            /*
-            Cylinder normally points vertically.
-
-            Rotate it sideways.
-            */
-
-
-            trail.rotation.z =
-
-                Math.PI
-                /
-                2;
+            }
 
 
 
-            trail.position.x =
+            meteor.position.set(
 
-                -6;
-
-
-
-            meteorGroup.add(
-                trail
-            );
-
-
-
-            /*
-            Random starting position.
-            */
-
-
-            meteorGroup.position.set(
-
-                -180
+                -150
                 -
                 Math.random()
                 *
                 150,
 
 
-                30
+                35
                 +
                 Math.random()
                 *
@@ -2130,57 +2609,46 @@
 
 
 
-            meteorGroup.userData.velocity =
+            meteor.userData.velocity =
 
                 new THREE.Vector3(
 
-                    1.3
+                    0.7
                     +
                     Math.random()
                     *
-                    2,
+                    0.6,
 
 
-                    -0.25
+                    -0.18
                     -
                     Math.random()
                     *
-                    0.5,
+                    0.2,
 
 
-                    (
-                        Math.random()
-                        -
-                        0.5
-                    )
-                    *
-                    0.3
+                    0
 
                 );
 
 
 
             scene.add(
-                meteorGroup
+                meteor
             );
 
 
             meteors.push(
-                meteorGroup
+                meteor
             );
 
         }
 
 
 
-        /*
-        Create multiple meteors.
-        */
-
-
         for (
             let i = 0;
-            i < 10;
+            i < 8;
             i++
         ) {
 
@@ -2192,20 +2660,17 @@
 
 
         /*
-        =========================================================
-        14. CLICK PLANETS
-        =========================================================
-        */
+         * =====================================================
+         * CLICK PLANET
+         * =====================================================
+         */
 
 
         const raycaster =
-
             new THREE.Raycaster();
 
 
-
-        const mouse =
-
+        const pointer =
             new THREE.Vector2();
 
 
@@ -2213,22 +2678,18 @@
         renderer.domElement
             .addEventListener(
 
-                "click",
+                "dblclick",
 
-                function (event) {
+                function(event) {
 
 
-                    mouse.x =
+                    pointer.x =
 
-                        (
+                        event.clientX
 
-                            event.clientX
+                        /
 
-                            /
-
-                            window.innerWidth
-
-                        )
+                        window.innerWidth
 
                         *
                         2
@@ -2238,7 +2699,7 @@
 
 
 
-                    mouse.y =
+                    pointer.y =
 
                         -(
 
@@ -2260,7 +2721,7 @@
 
                     raycaster.setFromCamera(
 
-                        mouse,
+                        pointer,
 
                         camera
 
@@ -2268,32 +2729,26 @@
 
 
 
-                    const planetMeshes =
+                    const result =
 
-                        planets.map(
+                        raycaster.intersectObjects(
 
-                            item =>
-                                item.planet
+                            planets.map(
+
+                                function(item) {
+
+                                    return item.mesh;
+
+                                }
+
+                            )
 
                         );
 
 
 
-                    const intersections =
-
-                        raycaster
-                            .intersectObjects(
-
-                                planetMeshes,
-
-                                false
-
-                            );
-
-
-
                     if (
-                        intersections.length
+                        result.length
                         >
                         0
                     ) {
@@ -2301,7 +2756,7 @@
 
                         focusPlanet(
 
-                            intersections[0]
+                            result[0]
                                 .object
 
                         );
@@ -2315,10 +2770,10 @@
 
 
         /*
-        =========================================================
-        15. FOCUS CAMERA ON PLANET
-        =========================================================
-        */
+         * =====================================================
+         * VISIT PLANET
+         * =====================================================
+         */
 
 
         function focusPlanet(
@@ -2326,37 +2781,30 @@
         ) {
 
 
-            const position =
-
+            const worldPosition =
                 new THREE.Vector3();
 
 
 
             planet.getWorldPosition(
-                position
+                worldPosition
             );
 
 
 
-            controls.target.copy(
-                position
+            cameraTarget.copy(
+                worldPosition
             );
 
 
 
-            camera.position.copy(
-                position
-            );
-
-
-
-            const distance =
+            cameraRadius =
 
                 Math.max(
 
                     planet.userData.size
                     *
-                    6,
+                    7,
 
                     8
 
@@ -2364,30 +2812,24 @@
 
 
 
-            camera.position.add(
+            cameraTheta =
+                0.7;
 
-                new THREE.Vector3(
 
-                    distance,
+            cameraPhi =
+                1.1;
 
-                    distance
-                    *
-                    0.5,
 
-                    distance
 
-                )
-
-            );
+            updateCamera();
 
 
 
             const info =
 
-                document
-                    .getElementById(
-                        "planet-info"
-                    );
+                document.getElementById(
+                    "planetInfo"
+                );
 
 
 
@@ -2400,37 +2842,30 @@
 
                 <h2>
 
-                    ${planet.userData.name}
+                    🪐 ${planet.userData.name}
 
                 </h2>
 
-
                 <p>
 
-                    You are now viewing
-                    ${planet.userData.name}.
-
-                </p>
-
-
-                <p>
-
-                    Visualization orbit radius:
-
+                    You are now visiting
                     <strong>
-
-                        ${planet.userData.distance}
-
-                    </strong>
+                        ${planet.userData.name}
+                    </strong>.
 
                 </p>
 
+                <p>
+
+                    Drag the mouse to fly
+                    around the planet.
+
+                </p>
 
                 <p>
 
-                    Drag the mouse around the
-                    planet or use the mouse wheel
-                    to explore it.
+                    Scroll to move closer
+                    or farther away.
 
                 </p>
 
@@ -2441,76 +2876,89 @@
 
 
         /*
-        =========================================================
-        16. SIMULATION CONTROLS
-        =========================================================
-        */
+         * =====================================================
+         * SIMULATION CONTROLS
+         * =====================================================
+         */
 
 
         let simulationSpeed =
             1;
 
 
-        let simulationRunning =
-            true;
+        let paused =
+            false;
 
 
 
-        document
-            .getElementById(
+        const speedSlider =
 
-                "speedControl"
-
-            )
-            .addEventListener(
-
-                "input",
-
-                function () {
-
-
-                    simulationSpeed =
-
-                        Number(
-                            this.value
-                        );
-
-                }
-
+            document.getElementById(
+                "speed"
             );
 
 
 
+        speedSlider.addEventListener(
+
+            "input",
+
+            function() {
+
+
+                simulationSpeed =
+
+                    Number(
+                        speedSlider.value
+                    );
+
+
+
+                document
+                    .getElementById(
+                        "speedText"
+                    )
+                    .textContent =
+
+                        simulationSpeed
+                        .toFixed(1)
+
+                        +
+                        "x";
+
+            }
+
+        );
+
+
+
         document
             .getElementById(
-
-                "pauseButton"
-
+                "pause"
             )
             .addEventListener(
 
                 "click",
 
-                function () {
+                function() {
 
 
-                    simulationRunning =
-
-                        !simulationRunning;
+                    paused =
+                        !paused;
 
 
 
                     this.textContent =
 
-                        simulationRunning
+                        paused
 
                         ?
 
-                        "⏸ Pause"
+                        "▶ Resume"
 
                         :
 
-                        "▶ Resume";
+                        "⏸ Pause";
 
                 }
 
@@ -2519,24 +2967,24 @@
 
 
         /*
-        Home button.
-        */
+         * =====================================================
+         * HOME BUTTON
+         * =====================================================
+         */
 
 
         document
             .getElementById(
-
-                "homeButton"
-
+                "home"
             )
             .addEventListener(
 
                 "click",
 
-                function () {
+                function() {
 
 
-                    controls.target.set(
+                    cameraTarget.set(
 
                         0,
                         0,
@@ -2545,18 +2993,25 @@
                     );
 
 
-                    camera.position.set(
+                    cameraRadius =
+                        137;
 
-                        0,
-                        65,
-                        125
 
-                    );
+                    cameraTheta =
+                        0;
+
+
+                    cameraPhi =
+                        1.05;
+
+
+                    updateCamera();
+
 
 
                     document
                         .getElementById(
-                            "planet-info"
+                            "planetInfo"
                         )
                         .style
                         .display =
@@ -2569,10 +3024,10 @@
 
 
         /*
-        =========================================================
-        17. ANIMATION
-        =========================================================
-        */
+         * =====================================================
+         * ANIMATION
+         * =====================================================
+         */
 
 
         const clock =
@@ -2602,78 +3057,11 @@
 
 
             /*
-            Rotate Sun.
-            */
+             * Rotate background slowly.
+             */
 
 
-            sun.rotation.y +=
-
-                delta
-                *
-                0.08;
-
-
-
-            /*
-            Pulsating Sun glow.
-            */
-
-
-            const pulse1 =
-
-                1
-
-                +
-
-                Math.sin(
-
-                    Date.now()
-                    *
-                    0.002
-
-                )
-
-                *
-                0.035;
-
-
-
-            const pulse2 =
-
-                1
-
-                +
-
-                Math.sin(
-
-                    Date.now()
-                    *
-                    0.001
-
-                )
-
-                *
-                0.05;
-
-
-
-            glow1.scale.setScalar(
-                pulse1
-            );
-
-
-            glow2.scale.setScalar(
-                pulse2
-            );
-
-
-
-            /*
-            Slowly rotate entire galaxy.
-            */
-
-
-            galaxy.rotation.y +=
+            stars.rotation.y +=
 
                 delta
                 *
@@ -2681,64 +3069,301 @@
 
 
 
-            /*
-            Slight star movement.
-            */
-
-
-            stars.rotation.y +=
+            galaxy.rotation.y +=
 
                 delta
+                *
+                0.006;
+
+
+
+            /*
+             * Pulsating Sun.
+             */
+
+
+            const time =
+
+                performance.now()
                 *
                 0.001;
 
 
 
+            sunGlow.scale.setScalar(
+
+                1
+
+                +
+
+                Math.sin(
+                    time
+                    *
+                    2
+                )
+
+                *
+                0.035
+
+            );
+
+
+
+            outerSunGlow.scale.setScalar(
+
+                1
+
+                +
+
+                Math.sin(
+                    time
+                )
+
+                *
+                0.05
+
+            );
+
+
+
             /*
-            Planet movement.
-            */
+             * Orbit planets.
+             */
 
 
             if (
-                simulationRunning
+                !paused
             ) {
 
 
                 planets.forEach(
 
-                    function (item) {
+                    function(item) {
+
+
+                        item.pivot
+                            .rotation
+                            .y +=
+
+                                delta
+
+                                *
+
+                                item.speed
+
+                                *
+
+                                0.15
+
+                                *
+
+                                simulationSpeed;
+
+
+
+                        item.mesh
+                            .rotation
+                            .y +=
+
+                                delta
+
+                                *
+
+                                0.35
+
+                                *
+
+                                simulationSpeed;
+
 
 
                         /*
-                        Orbit Sun.
-                        */
+                         * Earth's Moon.
+                         */
 
 
-                        item.pivot.rotation.y +=
+                        if (
 
-                            delta
+                            item.mesh
+                                .userData
+                                .moonPivot
 
+                        ) {
+
+
+                            item.mesh
+                                .userData
+                                .moonPivot
+                                .rotation
+                                .y +=
+
+                                    delta
+
+                                    *
+                                    1.7
+
+                                    *
+                                    simulationSpeed;
+
+                        }
+
+                    }
+
+                );
+
+
+
+                asteroidGroup
+                    .rotation
+                    .y +=
+
+                        delta
+                        *
+                        0.018
+                        *
+                        simulationSpeed;
+
+            }
+
+
+
+            /*
+             * Meteors.
+             */
+
+
+            meteors.forEach(
+
+                function(meteor) {
+
+
+                    meteor.position.add(
+
+                        meteor.userData
+                            .velocity
+
+                    );
+
+
+
+                    if (
+
+                        meteor.position.x
+                        >
+                        200
+
+                        ||
+
+                        meteor.position.y
+                        <
+                        -100
+
+                    ) {
+
+
+                        meteor.position.set(
+
+                            -180
+                            -
+                            Math.random()
                             *
+                            100,
 
-                            0.12
 
+                            40
+                            +
+                            Math.random()
                             *
+                            100,
 
-                            item.speed
 
+                            -120
+                            +
+                            Math.random()
                             *
+                            240
 
-                            simulationSpeed;
+                        );
+
+                    }
+
+                }
+
+            );
 
 
 
-                        /*
-                        Planet rotation.
-                        */
+            /*
+             * Render final frame.
+             */
 
 
-                        item.planet.rotation.y +=
+            renderer.render(
 
-                            delta
-                            *
-            
+                scene,
+
+                camera
+
+            );
+
+        }
+
+
+
+        /*
+         * START!
+         */
+
+
+        animate();
+
+
+
+        /*
+         * =====================================================
+         * HANDLE WINDOW RESIZE
+         * =====================================================
+         */
+
+
+        window.addEventListener(
+
+            "resize",
+
+            function() {
+
+
+                camera.aspect =
+
+                    window.innerWidth
+
+                    /
+
+                    window.innerHeight;
+
+
+
+                camera
+                    .updateProjectionMatrix();
+
+
+
+                renderer.setSize(
+
+                    window.innerWidth,
+
+                    window.innerHeight
+
+                );
+
+            }
+
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
